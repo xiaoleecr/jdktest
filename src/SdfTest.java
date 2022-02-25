@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,7 +19,6 @@ import java.util.stream.Stream;
  * @Date 2021/12/30
  */
 public class SdfTest {
-
     public static void main(String[] args) {
         // 这是分支1重新测试
         List<Person> pList = new ArrayList<>();
@@ -25,8 +27,8 @@ public class SdfTest {
         pList.add(new Person("Tom", 27));
         pList.add(new Person("Max", 27));
         pList.add(new Person());
-        List<Person> collect = pList.stream().filter(p -> p.getAge() != null && p.getName().equals("jean")).map(p -> new Person(p.getName(), p.getAge())).distinct().collect(Collectors.toList());
-        String names = pList.stream().filter(p -> null != p.getName()).map(p -> p.getName()).collect(Collectors.joining(","));
+        List<Person> collect = pList.stream().filter(p -> p.getAge() != null && p.getName().equals("jean")).map(p -> new Person(p.getName(),p.getAge())).distinct().collect(Collectors.toList());
+        String names = pList.stream().filter(p-> null != p.getName()).map(p -> p.getName()).collect(Collectors.joining(","));
 
 
         //定时任务线程池
@@ -42,6 +44,7 @@ public class SdfTest {
         public ConcurrentHashMap<String, Node> evaluateClassCache;
         private Node head;
         private Node tail;
+        //十分钟淘汰
         Long internal = 10 * 60 * 1000L;
 
         public void eliminate() {
