@@ -29,15 +29,15 @@ public class SdfTest {
         pList.add(new Person());
         List<Person> collect = pList.stream().filter(p -> p.getAge() != null && p.getName().equals("jean")).map(p -> new Person(p.getName(),p.getAge())).distinct().collect(Collectors.toList());
         String names = pList.stream().filter(p-> null != p.getName()).map(p -> p.getName()).collect(Collectors.joining(","));
-
-
-        //定时任务线程池
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-        executorService.scheduleAtFixedRate(() -> {
-            //缓存淘汰
-            System.out.println("每五秒钟淘汰一次");
-
-        }, 0L, 5, TimeUnit.SECONDS);
+        String str = "";
+        System.out.println();
+//        //定时任务线程池
+//        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+//        executorService.scheduleAtFixedRate(() -> {
+//            //缓存淘汰
+//            System.out.println("每五秒钟淘汰一次");
+//
+//        }, 0L, 5, TimeUnit.SECONDS);
     }
 
     class Cache {
